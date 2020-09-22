@@ -9,7 +9,7 @@ env.var_file = 'https://github.com/ansayyad/VPC-code/blob/master/network.tfvars'
 //env.notification_channel = 'my-slack-channel'
 //jenkins env vars
 env.jenkins_server_url = 'http://65.0.21.213/'
-env.jenkins_node_custom_workspace_path = "/var/lib/jenkins/workspace/${JOB_NAME}/"
+env.jenkins_node_custom_workspace_path = "/opt/jenkins_workspace/"
 env.jenkins_node_label = 'master'
 env.terraform_version = '0.12.17'
 
@@ -37,16 +37,16 @@ stages {
 
 stage('fetch_latest_code') {
 steps {
-git branch: "$git_branch" ,
-credentialsId: "$credentials_id" ,
-url: "$git_url"
+sh "cd $jenkins_node_custom_workspace_path"
+sh " git clone https://github.com/ansayyad/VPC-code.git"
+sh "cd VPC-code "
 }
 }
 
 stage('install_deps') {
 steps {
 sh "sudo apt install wget zip python-pip -y"
-sh "cd /tmp"
+//sh "cd /tmp"
 sh "curl -o terraform.zip https://releases.hashicorp.com/terraform/'$terraform_version'/terraform_'$terraform_version'_linux_amd64.zip"
 sh "unzip terraform.zip"
 sh "sudo mv terraform /usr/bin"
