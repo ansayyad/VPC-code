@@ -36,7 +36,7 @@ sh "cd VPC-code/ "
 }
 }
 
-/*stage('install_deps') {
+stage('install_deps') {
 steps {
 sh "sudo yum install wget zip python-pip -y"
 //sh "cd /tmp"
@@ -45,7 +45,7 @@ sh "unzip terraform.zip"
 sh "sudo mv terraform /usr/bin"
 sh "rm -rf terraform.zip"
 }
-}*/
+}
 
 stage('init_and_plan') {
 steps {
