@@ -23,13 +23,18 @@ env.terraform_version = '0.12.17'
 }*/
 
 pipeline {
-agent {
-node {
+
+agent
+{
+node
+{
 customWorkspace "$jenkins_node_custom_workspace_path"
 label "$jenkins_node_label"
 }
 }
+
 stages {
+
 stage('fetch_latest_code') {
 steps {
 git branch: "$git_branch" ,
@@ -37,6 +42,7 @@ credentialsId: "$credentials_id" ,
 url: "$git_url"
 }
 }
+
 stage('install_deps') {
 steps {
 sh "sudo apt install wget zip python-pip -y"
@@ -47,6 +53,7 @@ sh "sudo mv terraform /usr/bin"
 sh "rm -rf terraform.zip"
 }
 }
+
 stage('init_and_plan') {
 steps {
 sh "sudo terraform init $jenkins_node_custom_workspace_path"
@@ -60,15 +67,17 @@ steps {
 input 'Do you approve deployment?'
 }
 }*/
+
 stage('apply_changes') {
 steps {
 sh "sudo terraform apply -var-file= $var_file -auto-approve $jenkins_node_custom_workspace_path"
 //notifySlack("Deployment logs from jenkins server $jenkins_server_url/jenkins/job/$JOB_NAME/$BUILD_NUMBER/console", notification_channel, [])
 }
 }
-}
+    }
 post {
   always {
     cleanWs()
    }
-  }
+   }
+}
