@@ -1,4 +1,3 @@
-###Jenkinsfile###
 import groovy.json.JsonOutput
 //git env vars
 env.git_url = 'https://github.com/ansayyad/VPC-code.git'
