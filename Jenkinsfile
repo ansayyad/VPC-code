@@ -32,7 +32,7 @@ stage('fetch_latest_code') {
 steps {
 sh "cd $jenkins_node_custom_workspace_path"
 sh "sudo git clone https://github.com/ansayyad/VPC-code.git"
-sh "cd VPC-code "
+sh "cd VPC-code/ "
 }
 }
 
