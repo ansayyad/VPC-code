@@ -49,7 +49,7 @@ sh "rm -rf terraform.zip"
 
 stage('init_and_plan') {
 steps {
-sh "sudo terraform init $jenkins_node_custom_workspace_path"
+sh "terraform init"
 //sh "sudo terraform plan $jenkins_node_custom_workspace_path/workspace"
 //notifySlack("Build completed! Build logs from jenkins server $jenkins_server_url/jenkins/job/$JOB_NAME/$BUILD_NUMBER/console", notification_channel, [])
 }
