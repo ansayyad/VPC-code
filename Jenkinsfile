@@ -12,7 +12,8 @@ env.jenkins_server_url = 'http://65.0.21.213/'
 env.jenkins_node_custom_workspace_path = "/opt/jenkins_workspace/"
 env.jenkins_node_label = 'master'
 env.terraform_version = '0.12.17'
-
+env.ACCESS_KEY = credentials('AWS_ACCESS_KEY_ID')
+env.SECRET_KEY = credentials('AWS_SECRET_ACCESS_KEY')
 /*def notifySlack(text, channel, attachments) {
     def payload = JsonOutput.toJson([text: text,
         channel: channel,
